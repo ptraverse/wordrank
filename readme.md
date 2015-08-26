@@ -4,7 +4,7 @@ Interface for http://www.wordandphrase.info/frequencylist.asp
 
 * Input: English Word
 * Output: Rank (commonality)
-* * ie. Higher Number => Rarer Word.
+  * ie. Higher Number => Rarer Word.
 
 Inspired by Amazon SalesRank and Google PageRank
 
