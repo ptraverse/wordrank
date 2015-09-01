@@ -4,7 +4,7 @@
   "description": "Interface for http://www.wordandphrase.info/frequencylist.asp",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon index.js",
+    "start": "node ./node_modules/nodemon/bin/nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -24,6 +24,7 @@
     "phantomjs": "^1.9.18",
     "request": "latest",
     "shelljs": "latest",
+    "system": "^1.0.4",
     "underscore": "^1.8.3",
     "webpage": "^0.3.0"
   }
