@@ -94,7 +94,7 @@ var steps = [
             };
 
             /* This is where the magic happens */
-            $('input#w1').val(testPhrase); //fill out the word
+            $('input#rank').val(testPhrase); //fill out the word
             $('input[name="B1"]').click(); //click "Search" button
             /* That was exciting */
 
@@ -134,16 +134,16 @@ var steps = [
             // need to get text of xpath
             // html/body/div/table[2]/tbody/tr[2]/td[2]/a
             var a = document.evaluate(
-                'html/body/div/table[2]/tbody/tr[2]/td[2]',
+                'html/body/div/table[2]/tbody/tr[2]/td[4]',
                 document,
                 null,
                 XPathResult.STRING_TYPE,
                 null);
 
-            return a.stringValue;
+            return a.stringValue.toLowerCase();
         });
 
-        return (wordrank);
+        return wordrank;
     }
 
 ];

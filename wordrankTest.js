@@ -1,18 +1,41 @@
-// usage: node wordrankTest.js <test-word>
-
+// usage: node wordrankTest.js
 var wordrank = require('./wordrank');
-var _ = require('underscore');
 
-//for CLI
-var args = process.argv;
-var testPhrase = args[args.length - 1];
+//poor man's assert
+var assert = function(condition, message) {
+    if (!condition) {
+        throw message || "Assertion failed";
+    }
+};
 
-//default test word
-if (testPhrase === 'wordrankTest.js') {
-	testPhrase = 'ornithology'; //34322
-}
 
-//invoke "scrape" function, use result in callback
-wordrank.scrape(testPhrase, function(rank) {
-	console.log(rank);
-});
+/* getWord Test */
+var getWordTest = function() {
+	var testPhrase = 'ornithology';
+	console.log("Getting Word: "+testPhrase+" ... ");
+	wordrank.getWord(testPhrase, function(rank) {
+		console.log("Got rank for "+testPhrase+"!");
+		console.log(rank); //34322
+		assert(parseInt(rank)===34322,"ornithology should be 34322");
+	});
+};
+
+
+/* getRank Test*/
+var getRankTest = function() {
+	var testRank = 23456;
+	console.log("Getting Rank: "+testRank+" ... ");
+	wordrank.getRank(testRank, function(word) {
+		console.log("Got word for "+testRank+"!");
+		console.log(word); //"hibernate"
+		assert(word=="hibernate","23456 should be hibernate");
+	});
+};
+
+
+/* Run Tests */
+getWordTest();
+getRankTest();
+
+//TODO - Test for weird results - super high numbers, words that aren't words, words that aren't in the list
+//Also - Test for connection issues - throttling - etc.
