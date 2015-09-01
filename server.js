@@ -20,20 +20,14 @@ app.param('word', function(req, res, next, word) {
 });
 
 app.get('/wordrank/:word', function(req, res){
-
     var word = req.word;
     var jsons = { 'request': { 'word': word } };
     var rank = wordrank.scrape(word, function(result) {
-        var response = { 'word': word, 'rank': result};
+        console.log(result);
+        var response = { 'word': word, 'rank': parseInt(result)};
         jsons.response = response;
         res.send('<pre>'+JSON.stringify(jsons, null, '\t')+'</pre>');
     });
-
-});
-
-app.get('/', function (req, res) {
-
-    res.send('It works!');
 });
 
 app.listen('8081');
