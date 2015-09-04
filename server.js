@@ -26,7 +26,7 @@ app.get('/word/:word', function(req, res){
         console.log(result);
         var response = { 'word': word, 'rank': parseInt(result)};
         jsons.response = response;
-        res.send('<pre>'+JSON.stringify(jsons, null, '\t')+'</pre>');
+        res.json(jsons);
     });
 });
 
@@ -43,7 +43,7 @@ app.get('/rank/:rank', function(req, res){
         console.log(result);
         var response = { 'rank': rank, 'word': parseInt(result)};
         jsons.response = response;
-        res.send('<pre>'+JSON.stringify(jsons, null, '\t')+'</pre>');
+        res.json(jsons);
     });
 });
 
