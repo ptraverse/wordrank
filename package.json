@@ -4,28 +4,49 @@
   "description": "Interface for http://www.wordandphrase.info/frequencylist.asp",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon server.js",
-    "test": "node ./wordrankTest.js"
+    "start": "sudo mongod -f ./mongod.conf & node ./node_modules/nodemon/bin/nodemon server.js",
+    "test": "node ./tests/wordrankTest.js && node ./tests/mongodbTest.js"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
-    "assert": "^1.3.0",
-    "body-parser": "latest",
-    "cheerio": "latest",
-    "express": "latest",
-    "forms": "latest",
-    "jade": "latest",
-    "mocha": "^2.2.5",
-    "nightmare": "^1.8.2",
-    "node-phantom": "^0.2.5",
-    "nodemon": "^1.4.1",
-    "phantom": "^0.7.2",
-    "phantomjs": "^1.9.18",
-    "request": "latest",
-    "shelljs": "latest",
-    "system": "^1.0.4",
-    "underscore": "^1.8.3",
-    "webpage": "^0.3.0"
-  }
+    "anymatch": "^1.3.0",
+    "body-parser": "*",
+    "configstore": "^1.2.1",
+    "express": "^4.13.3",
+    "forms": "*",
+    "hawk": "^3.1.0",
+    "jade": "*",
+    "mocha": "*",
+    "mongodb": "^1.4.39",
+    "mongoskin": "^1.4.13",
+    "nightmare": "*",
+    "node-phantom": "*",
+    "nodemon": "*",
+    "phantom": "*",
+    "phantomjs": "*",
+    "process-nextick-args": "^1.0.2",
+    "registry-url": "^3.0.3",
+    "repeating": "^2.0.0",
+    "request": "*",
+    "semver-diff": "^2.0.0",
+    "shelljs": "*",
+    "system": "*",
+    "underscore": "*",
+    "webpage": "*"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ptraverse/wordrank.git"
+  },
+  "keywords": [
+    "english"
+  ],
+  "author": "Philippe Traverse <philippe.traverse@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/ptraverse/wordrank/issues"
+  },
+  "homepage": "https://github.com/ptraverse/wordrank"
 }

@@ -1,4 +1,4 @@
-//demo.js
+//demo.js - interactive elements of demo page at /demo
 
 $(document).ready(function() {
 

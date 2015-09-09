@@ -1,5 +1,5 @@
 // usage: node wordrankTest.js
-var wordrank = require('./wordrank');
+var wordrank = require("../wordrank");
 
 //poor man's assert
 var assert = function(condition, message) {
@@ -11,12 +11,14 @@ var assert = function(condition, message) {
 
 /* getWord Test */
 var getWordTest = function() {
-	var testPhrase = 'ornithology';
-	console.log("Getting Word: "+testPhrase+" ... ");
+	var testPhrase = "ornithology";
+	var expectedResult = 34322;
+	console.log("Getting Word: "+testPhrase);
+	console.log("Expecting: "+expectedResult);
 	wordrank.getWord(testPhrase, function(rank) {
-		console.log("Got rank for "+testPhrase+"!");
-		console.log(rank); //34322
-		assert(parseInt(rank)===34322,"ornithology should be 34322");
+		console.log("Finished! Got: ");
+		console.log(rank);
+		assert(parseInt(rank)===expectedResult,testPhrase+" should be "+expectedResult);
 	});
 };
 
@@ -24,11 +26,13 @@ var getWordTest = function() {
 /* getRank Test*/
 var getRankTest = function() {
 	var testRank = 23456;
-	console.log("Getting Rank: "+testRank+" ... ");
+	var expectedResult = "hibernate";
+	console.log("Getting Rank: "+testRank);
+	console.log("Expecting: "+expectedResult);
 	wordrank.getRank(testRank, function(word) {
-		console.log("Got word for "+testRank+"!");
-		console.log(word); //"hibernate"
-		assert(word=="hibernate","23456 should be hibernate");
+		console.log("Finished!");
+		console.log("Got: "+word);
+		assert(word==expectedResult,testRank+" should be "+expectedResult);
 	});
 };
 

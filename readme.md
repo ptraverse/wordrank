@@ -44,3 +44,20 @@ In other words, "the" is the most common word in English, and "ornithology" is t
 
 	philippe@ubuntu64:~/workspace/wordrank$ ./node_modules/phantomjs/bin/phantomjs ./scratch.js alphabet
 	9387
+
+### Notes
+
+npm start:
+mongod -f ./mongod.conf && ./node_modules/mongodb-rest/bin/mongodb-rest
+
+mongo
+/* Create if needed and use wordrank db */
+use wordrank
+
+/* Create wordrank collection */
+db.words.insert(
+	{
+		word: "ornithology",
+		rank: "123456"
+	}
+)
