@@ -4,7 +4,7 @@
   "description": "Interface for http://www.wordandphrase.info/frequencylist.asp",
   "main": "index.js",
   "scripts": {
-    "start": "sudo mongod -f ./mongod.conf & node ./node_modules/nodemon/bin/nodemon server.js",
+    "start": "sudo mongod -f ./mongod.conf & node ./server.js",
     "test": "node ./tests/wordrankTest.js && node ./tests/mongodbTest.js"
   },
   "license": "ISC",
