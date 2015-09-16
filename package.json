@@ -2,9 +2,11 @@
   "name": "wordrank",
   "version": "1.0.0",
   "description": "Interface for http://www.wordandphrase.info/frequencylist.asp",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "sudo mongod -f ./mongod.conf & node ./server.js",
+    "prestart": "mongod -f ./mongod.conf --fork --logpath /dev/null",
+    "start": "nodemon",
+    "poststop": "mongo admin --eval 'db.shutdownServer()' > /dev/null & rm -rf /data/db/mongod.lock",
     "test": "node ./tests/wordrankTest.js && node ./tests/mongodbTest.js"
   },
   "license": "ISC",
@@ -32,7 +34,8 @@
     "shelljs": "*",
     "system": "*",
     "underscore": "*",
-    "webpage": "*"
+    "webpage": "*",
+    "which": "^1.1.2"
   },
   "directories": {
     "test": "tests"

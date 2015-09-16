@@ -17,7 +17,6 @@ app.get('/demo', function (req, res) {
     res.sendFile('public/demo.html' , { root : __dirname});
 });
 
-
 /* Word Route */
 /** Param Binding **/
 app.param('word', function(req, res, next, word) {
