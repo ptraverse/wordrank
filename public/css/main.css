@@ -4,8 +4,21 @@
    Author's custom styles
    ========================================================================== */
 
+.input {
+	padding: 0px;
+}
 
+.row {
+	padding-top: 30px;
+}
 
+.container {
+	margin-top:200px;
+	border: 1px dotted gray;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
 
 
 
