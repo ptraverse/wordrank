@@ -48,8 +48,9 @@ app.get('/rank/:rank', function(req, res){
     var jsons = { 'request': { 'rank': rank } };
     var word = wordrank.getRank(rank, function(result) {
         console.log(result);
-        var response = { 'rank': rank, 'word': parseInt(result)};
+        var response = { 'rank': rank, 'word': result};
         jsons.response = response;
+        console.log(jsons);
         res.json(jsons);
     });
 });

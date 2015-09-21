@@ -16,6 +16,20 @@ var _scrapeWord = function(word, callback) {
 	});
 };
 
+/** Scrape Rank Directly via PhantomJS Wrapper */
+var _scrapeRank = function(rank, callback) {
+	var execString = './node_modules/phantomjs/bin/phantomjs ./rankScrape.js '+rank;
+	var result = exec(execString, function (err, stdout, stderr) {
+		if (err) {
+			throw err;
+		}
+		var word = stdout.trim();
+		//Save result to MongoDB
+		dbCreateWord(word, rank);
+		callback(word);
+	});
+};
+
 /** Save Results to MongoDB **/
 var dbCreateWord = function(word, rank, callback) {
 	var json = { 'word': word, 'rank': rank };
@@ -47,6 +61,24 @@ var dbReadWord = function(word, callback) {
 		}
 	});
 };
+
+/** Fetch from Mongodb by rank **/
+var dbReadWordByRank = function(rank, callback) {
+	db.bind('words');
+	var query = { 'rank': rank };
+	db.words.findOne(query, function(err, result) {
+		if (err) {
+			throw err;
+		}
+		if (result) {
+			callback(err, result.word);
+		} else {
+			callback(err, undefined);
+		}
+	});
+};
+
+
 var dbUpdateWord = function(word, rank, callback) {
 	throw "not yet implemented";
 };
@@ -79,15 +111,19 @@ var getWord = function(word, callback) {
 };
 
 var getRank = function(rank, callback) {
-	var execString = './node_modules/phantomjs/bin/phantomjs ./rankScrape.js '+rank;
-	var result = exec(execString, function (err, stdout, stderr) {
+	dbReadWordByRank(rank, function(err, word) {
 		if (err) {
-			console.log(err);
-			exit(0);
+			throw err;
 		}
-		callback(stdout.trim());
+		if (word) {
+			return callback(word);
+		} else {
+			return _scrapeRank(rank, callback);
+		}
 	});
 };
+
+//TODO - isCached function
 
 var exports = module.exports = {};
 
