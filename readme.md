@@ -8,6 +8,14 @@ Interface for http://www.wordandphrase.info/frequencylist.asp
 
 Inspired by Amazon SalesRank and Google PageRank
 
+### Build
+
+	git clone https://github.com/ptraverse/wordrank.git
+	cd wordrank
+	npm update
+	sudo npm start
+	sudo npm stop
+
 ### Example
 
 	philippe@ubuntu64:~/workspace$ wordrank ornithology
@@ -18,11 +26,17 @@ Inspired by Amazon SalesRank and Google PageRank
 
 In other words, "the" is the most common word in English, and "ornithology" is te 34,322nd.
 
+### Demo
+
+build and use demo.html
+
+<img src="/demoCapture.JPG" />
+
 ### TODOs
 
 * implement DB logging, caching
 * implement demo key + user keys
-* open up REST api
+* open up REST https://github.com/ptraverse/wordrank.git
 * make available also as command line API
 * more output
 
