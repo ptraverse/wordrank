@@ -22,6 +22,7 @@
     "mongodb": "^1.4.39",
     "mongoskin": "^1.4.13",
     "nightmare": "*",
+    "node-curl": "^0.3.3",
     "node-phantom": "*",
     "nodemon": "*",
     "phantom": "*",
