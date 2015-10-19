@@ -61,11 +61,17 @@ build and use demo.html
 
 ### Notes
 
-npm start:
+/* post install mongo make db folder */
+sudo mkdir -p /data/db
+chown `whoami` /data/db
+
+/* mongodaemon start */
 mongod -f ./mongod.conf && ./node_modules/mongodb-rest/bin/mongodb-rest
 
+/* CLI */
 mongo
 /* Create if needed and use wordrank db */
+
 use wordrank
 
 /* Create wordrank collection */
