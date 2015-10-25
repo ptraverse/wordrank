@@ -30,10 +30,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Philippe Traverse 2015</a>
+          <a class="navbar-brand" href="#">© Philippe Traverse 2015</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <!-- <form class="navbar-form navbar-right" role="form">
+          <form class="navbar-form navbar-right" role="form">
             <div class="form-group">
               <input type="text" placeholder="Email" class="form-control">
             </div>
@@ -41,9 +41,10 @@
               <input type="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
-          </form> -->
+          </form>
         </div><!--/.navbar-collapse -->
       </div>
+      <br />
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -51,24 +52,26 @@
       <div class="container">
         <h1>Wordrank</h1>
         <p>An API for <a href="http://www.wordandphrase.info/frequencyList.asp" target="_blank">this web site</a>.</p>
-        <p><a class="btn btn-primary btn-lg" href="https://github.com/ptraverse/wordrank" role="button">GitHub</a></p>
-      </div>
-    </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Live Demo Form</h2>
-          <p>Documentation by Example</p>
-          <p><a class="btn btn-default" href="/demo.html" role="button">View details &raquo;</a></p>
-       </div>
-        <!-- <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div> -->
+          <P><input type="text" id="inputWord" style="width:100%;" placeholder="enter single english word"/></p>
+          <p><a class="btn btn-primary btn-lg" role="button">getRank</a></p>
+          <p><pre><div id="result"></div></pre></p>
       </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-info btn-md" role="button" href="/register.html" title="Free unlimited access is provided via API auth keys. Usage without auth is limited to 100 calls/day.">Sign Up</a> 
+            <br />
+            <br />
+            <a class="btn btn-danger btn-md" role="button" href="https://github.com/ptraverse/wordrank">Github</a>            
+            <a class="btn btn-warning btn-md" role="button" href="https://www.npmjs.com/package/wordrank-client">NPM</a>            
+          </div>        
+        </div>
+        <br />
+      </div>
+
+    </div>
 
       <hr>
 
@@ -80,7 +83,7 @@
 
         <script src="js/vendor/bootstrap.min.js"></script>
 
-        <script src="js/main.js"></script>
+        <script src="js/index.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
