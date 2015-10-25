@@ -80,3 +80,29 @@ db.words.insert(
 
 	philippe@ubuntu64:~/workspace/wordrank$ ./node_modules/phantomjs/bin/phantomjs ./scratch.js alphabet
 	9387
+
+=======
+
+### Notes
+
+/* post install mongo make db folder */
+sudo mkdir -p /data/db
+chown `whoami` /data/db
+
+/* mongodaemon start */
+mongod -f ./mongod.conf && ./node_modules/mongodb-rest/bin/mongodb-rest
+
+/* CLI */
+mongo
+/* Create if needed and use wordrank db */
+
+use wordrank
+
+/* Create wordrank collection */
+db.words.insert(
+	{
+		word: "ornithology",
+		rank: "123456"
+	}
+)
+
