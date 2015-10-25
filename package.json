@@ -7,7 +7,10 @@
     "prestart": "mongod -f ./mongod.conf --fork --logpath /dev/null",
     "start": "nodemon",
     "poststop": "mongo admin --eval 'db.shutdownServer()' > /dev/null & rm -rf /data/db/mongod.lock",
-    "test": "node ./tests/wordrankTest.js && node ./tests/mongodbTest.js"
+    "test": "node ./tests/wordrankTest.js && node ./tests/mongodbTest.js",
+    "deploy": "node ./private/deploy.js",
+    "deploy-dev": "node ./private/deploy.js development",
+    "deploy-prod": "node ./private/deploy.js production"
   },
   "license": "ISC",
   "dependencies": {
@@ -16,11 +19,13 @@
     "configstore": "^1.2.1",
     "express": "^4.13.3",
     "forms": "*",
+    "fs-extra": "^0.24.0",
     "hawk": "^3.1.0",
     "jade": "*",
     "mocha": "*",
     "mongodb": "^1.4.39",
     "mongoskin": "^1.4.13",
+    "my-ip": "^1.1.1",
     "nightmare": "*",
     "node-curl": "^0.3.3",
     "node-phantom": "*",

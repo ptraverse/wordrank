@@ -1,12 +1,10 @@
 # WordRank
 
-Interface for http://www.wordandphrase.info/frequencylist.asp
+Mongodb Caching Server to provide nodejs module for http://www.wordandphrase.info/frequencylist.asp
 
 * Input: English Word
 * Output: Rank (commonality)
   * ie. Higher Number => Rarer Word.
-
-Inspired by Amazon SalesRank and Google PageRank
 
 ### Build
 
@@ -18,13 +16,9 @@ Inspired by Amazon SalesRank and Google PageRank
 
 ### Example
 
-	philippe@ubuntu64:~/workspace$ wordrank ornithology
-	34322
+<img src="/banana.jpg" />
 
-	philippe@ubuntu64:~/workspace$ wordrank the
-	1
-
-In other words, "the" is the most common word in English, and "ornithology" is te 34,322nd.
+In other words, "banana" is the 4,721st word in rarity in the "common" english language.
 
 ### Demo
 
@@ -32,13 +26,41 @@ build and use demo.html
 
 <img src="/demoCapture.JPG" />
 
-### TODOs
+### Mongodb Init
 
-* implement DB logging, caching
-* implement demo key + user keys
-* open up REST https://github.com/ptraverse/wordrank.git
-* make available also as command line API
-* more output
+/* Start MongoDB server using conf file and add mongodb-rest for crud */
+mongod -f ./mongod.conf && ./node_modules/mongodb-rest/bin/mongodb-rest
+
+/* CLI Instructions */
+mongo
+
+/* Create if needed and use wordrank db */
+use wordrank
+
+/* Create wordrank collection */
+db.words.insert(
+	{
+		word: "the",
+		rank: "1"
+	}
+)
+
+
+### Moonshots
+* Full sentences
+* Adding all the other info:
+* Part of speech
+* Rarity Overall/by Source
+** { Spoken, Fiction, Magazines, Newspaper, Academic  }
+* Correlates / Synonyms
+* Rarity "Category"
+* Single/Multi Entry!? (homonyms, other definitions)
+* Human Readable Definition
+* Grammar
+* Matrix - comparisons
+
+
+### Invoke Scrape via PhantomJS Directly on cli
 
 	philippe@ubuntu64:~/workspace/wordrank$ ./node_modules/phantomjs/bin/phantomjs ./scratch.js foobar
 
@@ -58,20 +80,3 @@ build and use demo.html
 
 	philippe@ubuntu64:~/workspace/wordrank$ ./node_modules/phantomjs/bin/phantomjs ./scratch.js alphabet
 	9387
-
-### Notes
-
-npm start:
-mongod -f ./mongod.conf && ./node_modules/mongodb-rest/bin/mongodb-rest
-
-mongo
-/* Create if needed and use wordrank db */
-use wordrank
-
-/* Create wordrank collection */
-db.words.insert(
-	{
-		word: "ornithology",
-		rank: "123456"
-	}
-)
