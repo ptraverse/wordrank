@@ -45,9 +45,9 @@ var getRankTest = function() {
 };
 
 /* Run Tests */
-getUncachedWordTest();
-getCachedWordTest();
-// getWordTest();
+// getUncachedWordTest();
+// getCachedWordTest();
+getWordTest();
 // getRankTest();
 
 
