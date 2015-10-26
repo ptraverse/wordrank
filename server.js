@@ -5,9 +5,10 @@ var os = require('os');
 var path = require('path');
 var bodyParser = require('body-parser');
 var wordrank = require('./wordrank');
+var conf = require('./private/conf');
+var myIP = require('my-ip');
 
 var app = express();
-app.use(bodyParser());
 app.set('views',path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.static(process.cwd() + '/public'));
@@ -57,8 +58,9 @@ app.get('/rank/:rank', function(req, res){
 
 
 // Iinitailize Server, Show IP Address
-port = '8081';
-app.listen(port);
-console.log('Magic happens on port '+port);
-console.log(os.networkInterfaces());
+app.listen(conf.port);
+console.log();
+console.log('Environment: '+conf.env);
+console.log('App started at http://'+myIP()+':'+conf.port);
+
 exports = module.exports = app;
