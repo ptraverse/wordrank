@@ -3,17 +3,8 @@
 
 // invoke with
 // philippe@ubuntu64:~/workspace/wordrank$
-// ./node_modules/phantomjs/bin/phantomjs ./wordrankScrape.js
-// Eventually:
-// ./node_modules/phantomjs/bin/phantomjs ./wordrankScrape.js --word="ornithology"
-// ./node_modules/phantomjs/bin/phantomjs ./wordrankScrape.js -w ornithology
-// ./wordrank --word="ornithology"
-// ./wordrank -w ornithology
-// Bash?
-// wordrank ornithology
-// Npm
-// wordrank = require('wordrank');
-// rank = wordrank.scrape("ornithology");
+// ./node_modules/phantomjs/bin/phantomjs ./wordScrape.js ornithology
+
 var _ = require('underscore');
 var webpage = require('webpage');
 
@@ -60,12 +51,28 @@ page.onNavigationRequested = function(url, type, willNavigate, main) {
 
 /* --------------------- */
 
+
 //Each step is stepped into by the interval function at the end
 var steps = [
 
     //Go to dat url
     function() {
         page.open('http://www.wordandphrase.info/frequencyList.asp');
+
+        //Have to use custom click firer
+        //http://stackoverflow.com/questions/15739263/phantomjs-click-an-element
+        var click = function(el) {
+            var ev = document.createEvent("MouseEvent");
+            ev.initMouseEvent(
+                "click",
+                true /* bubble */ , true /* cancelable */ ,
+                window, null,
+                0, 0, 0, 0, /* coordinates */
+                false, false, false, false, /* modifier keys */
+                0 /*left*/ , null
+            );
+            el.dispatchEvent(ev);
+        };
     },
 
     //Search for a word
@@ -78,20 +85,6 @@ var steps = [
 
         //fill out the form
         page.evaluate(function(testPhrase) {
-            //Have to use custom click firer
-            //http://stackoverflow.com/questions/15739263/phantomjs-click-an-element
-            var click = function(el) {
-                var ev = document.createEvent("MouseEvent");
-                ev.initMouseEvent(
-                    "click",
-                    true /* bubble */ , true /* cancelable */ ,
-                    window, null,
-                    0, 0, 0, 0, /* coordinates */
-                    false, false, false, false, /* modifier keys */
-                    0 /*left*/ , null
-                );
-                el.dispatchEvent(ev);
-            };
 
             /* This is where the magic happens */
             $('input#w1').val(testPhrase); //fill out the word
@@ -110,26 +103,8 @@ var steps = [
     //Crawl the number we want
     function() {
 
-        //add jquery again (?)
-        var injectSuccess = page.injectJs('./jquery.min.js');
-
-        //get the number
+        //get the rank
         var wordrank = page.evaluate(function() {
-
-            //Have to use custom click firer
-            //http://stackoverflow.com/questions/15739263/phantomjs-click-an-element
-            var click = function(el) {
-                var ev = document.createEvent("MouseEvent");
-                ev.initMouseEvent(
-                    "click",
-                    true /* bubble */ , true /* cancelable */ ,
-                    window, null,
-                    0, 0, 0, 0, /* coordinates */
-                    false, false, false, false, /* modifier keys */
-                    0 /*left*/ , null
-                );
-                el.dispatchEvent(ev);
-            };
 
             // need to get text of xpath
             // html/body/div/table[2]/tbody/tr[2]/td[2]/a
@@ -142,6 +117,12 @@ var steps = [
 
             return a.stringValue;
         });
+
+        //get the part of speech (noun, verb etc)
+        var partOfSpeech = page.evaluate(function () {
+            // body...
+        });
+
         return (wordrank);
     }
 
