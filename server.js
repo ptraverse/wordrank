@@ -27,12 +27,10 @@ app.param('word', function(req, res, next, word) {
 /** Route **/
 app.get('/word/:word', function(req, res){
     var word = req.word;
-    var jsons = { 'request': { 'word': word } };
     var rank = wordrank.getWord(word, function(result) {
         console.log(result);
-        var response = { 'word': word, 'rank': parseInt(result)};
-        jsons.response = response;
-        res.json(jsons);
+        var response = { 'word': word, 'result': result};        
+        res.json(response);
     });
 });
 

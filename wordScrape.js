@@ -20,7 +20,7 @@ var testPhrase = args[args.length - 1];
 
 // Route "console.log()" calls from within the Page context to the main Phantom context (i.e. current "this")
 page.onConsoleMessage = function(msg) {
-    console.log('console> ' + msg);
+    // console.log('console> ' + msg);
 };
 
 page.onAlert = function(msg) {
@@ -100,30 +100,63 @@ var steps = [
         page.switchToChildFrame('righto');
     },
 
+    //If there is more than one result Then click on the first one
+    function() {
+
+    },
+
+    //Switch to bottom frame
+    function() {
+        page.switchToParentFrame();
+        page.switchToChildFrame('xbottom');
+    },
+
     //Crawl the number we want
     function() {
 
-        //get the rank
-        var wordrank = page.evaluate(function() {
-
-            // need to get text of xpath
-            // html/body/div/table[2]/tbody/tr[2]/td[2]/a
+        var result = page.evaluate(function() {
+            // summary string
             var a = document.evaluate(
-                'html/body/div/table[2]/tbody/tr[2]/td[2]',
+                'html/body/table[1]/tbody/tr[1]/td[1]',
                 document,
                 null,
                 XPathResult.STRING_TYPE,
                 null);
 
-            return a.stringValue;
+            //get the part of speech (noun, verb etc)
+            var re1 = /\w+\s/g;
+            console.log(a);
+            console.log(a.stringValue);
+            var wMatches = (a.stringValue).match(re1);
+            var partOfSpeech;
+            if (wMatches) {
+                partOfSpeech = wMatches[1].trim();
+            } else {
+                console.log('no wMatches?');
+                console.log(wMatches);
+            }
+
+            //get the numbers for rank and freq
+            var re2 = /\d+/g;
+            var dMatches = a.stringValue.match(re2);
+            var rank;
+            var freq;
+            if (dMatches) {
+                rank = dMatches[0];
+                freq = dMatches[1];
+            } else {
+                console.log('no dMatches?');
+                console.log(dMatches);
+            }
+
+            result = {};
+            result.partOfSpeech = partOfSpeech;
+            result.rank = rank;
+            result.freq = freq;
+            return result;
         });
 
-        //get the part of speech (noun, verb etc)
-        var partOfSpeech = page.evaluate(function () {
-            // body...
-        });
-
-        return (wordrank);
+        return result;
     }
 
 ];

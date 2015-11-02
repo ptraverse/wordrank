@@ -31,8 +31,11 @@ var _scrapeRank = function(rank, callback) {
 };
 
 /** Save Results to MongoDB **/
-var dbCreateWord = function(word, rank, callback) {
-	var json = { 'word': word, 'rank': rank };
+var dbCreateWord = function(word, result, callback) {
+	console.log('dbCreateWord');
+	var result = JSON.parse(result);
+	console.log(result.rank);
+	var json = { 'word': word, 'rank': result.rank, 'freq': result.freq, 'partOfSpeech': result.partOfSpeech };
 	db.bind('words');
 	db.words.insert(json, function(err) {
 		if (err) {
@@ -55,7 +58,7 @@ var dbReadWord = function(word, callback) {
 			throw err;
 		}
 		if (result) {
-			callback(err, result.rank);
+			callback(err, result);
 		} else {
 			callback(err, undefined);
 		}
@@ -98,12 +101,12 @@ var dbRemoveWord = function(word, callback) {
 };
 
 var getWord = function(word, callback) {
-	dbReadWord(word, function(err, rank) {
+	dbReadWord(word, function(err, readResult) {
 		if (err) {
 			throw err;
 		}
-		if (rank) {
-			return callback(rank);
+		if (readResult) {
+			return callback(readResult);
 		} else {
 			return _scrapeWord(word, callback);
 		}

@@ -8,6 +8,14 @@ var assert = function(condition, message) {
     }
 };
 
+/* Able to invoke from commandline via 
+
+*/
+var getWordTest = function(testWord) {
+	wordrank.getWord(testWord, function(result) {
+	});
+};
+
 
 /* getCachedWord Test */
 var getCachedWordTest = function() {
@@ -23,12 +31,12 @@ var getCachedWordTest = function() {
 };
 
 var getUncachedWordTest = function() {
-	var testPhrase = "algae";
+	var testPhrase = "turkey";
 	console.log("Getting Uncached Word: "+testPhrase);
 	wordrank.getWord(testPhrase, function(rank) {
 		console.log('finished! got: '+rank);
 		assert(typeof(rank)!='undefined',rank+" should be defined");
-		wordrank.dbRemoveWord(testPhrase);
+		// wordrank.dbRemoveWord(testPhrase);
 	});
 };
 
@@ -47,7 +55,7 @@ var getRankTest = function() {
 /* Run Tests */
 // getUncachedWordTest();
 // getCachedWordTest();
-getWordTest();
+getWordTest(process.argv[2]); //eg. node ./wordrankTest.js ornithology
 // getRankTest();
 
 
