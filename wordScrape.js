@@ -125,7 +125,6 @@ var steps = [
 
             //get the part of speech (noun, verb etc)
             var re1 = /\w+\s/g;
-            console.log(a);
             console.log(a.stringValue);
             var wMatches = (a.stringValue).match(re1);
             var partOfSpeech;
@@ -167,7 +166,7 @@ interval = setInterval(function() {
         var result = steps[testindex]();
         testindex++;
         if (typeof result !== 'undefined') {
-            console.log(result);
+            console.log(JSON.stringify(result));
         }
     }
     if (typeof steps[testindex] != "function") {

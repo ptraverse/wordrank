@@ -9,7 +9,7 @@ var _scrapeWord = function(word, callback) {
 		if (err) {
 			throw err;
 		}
-		var rank = stdout.trim();
+		var rank = JSON.parse(stdout.trim());
 		// Save the result to MongoDb
 		dbCreateWord(word, rank);
 		callback(rank);
@@ -31,9 +31,10 @@ var _scrapeRank = function(rank, callback) {
 };
 
 /** Save Results to MongoDB **/
-var dbCreateWord = function(word, result, callback) {
+var dbCreateWord = function(word, jsonResult, callback) {
 	console.log('dbCreateWord');
-	var result = JSON.parse(result);
+	console.log(jsonResult);
+	var result = jsonResult;
 	console.log(result.rank);
 	var json = { 'word': word, 'rank': result.rank, 'freq': result.freq, 'partOfSpeech': result.partOfSpeech };
 	db.bind('words');
