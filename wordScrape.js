@@ -4,8 +4,8 @@
 // invoke with
 // philippe@ubuntu64:~/workspace/wordrank$
 // ./node_modules/phantomjs/bin/phantomjs ./wordScrape.js ornithology
+'use strict';
 
-var _ = require('underscore');
 var webpage = require('webpage');
 
 var page = webpage.create();
@@ -14,7 +14,6 @@ var testindex = 0;
 
 //for CLI
 var system = require('system');
-var args = system.args;
 var testPhrase = args[args.length - 1];
 
 
@@ -119,6 +118,7 @@ var steps = [
         });
 
         //get the part of speech (noun, verb etc)
+        //TODO
         var partOfSpeech = page.evaluate(function () {
             // body...
         });
